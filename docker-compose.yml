@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  some-rabbit:
+    image: rabbitmq:3-management
+    container_name: some-rabbit
+    environment:
+      RABBITMQ_DEFAULT_USER: "user"
+      RABBITMQ_DEFAULT_PASS: "password"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - test-network
+        
+  producer-api:
+    container_name: producer-api
+    build:
+      context: ./src/ProducerAPI
+      dockerfile: Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_RabbitMqSettings__Host: "some-rabbit"
+      ASPNETCORE_RabbitMqSettings__QueueName: "test_from_docker_compose"
+    ports:
+      - "90:80"
+    networks:
+      - test-network
+        
+networks:
+  test-network:
+    driver: bridge
