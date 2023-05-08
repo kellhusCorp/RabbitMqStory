@@ -25,6 +25,8 @@ services:
       - "90:80"
     networks:
       - test-network
+    depends_on:
+      - some-rabbit
       
   consumer-api:
     container_name: consumer
@@ -39,6 +41,9 @@ services:
       - "91:80"
     networks:
       - test-network
+    depends_on:
+      - some-rabbit
+    restart: on-failure
         
 networks:
   test-network:
