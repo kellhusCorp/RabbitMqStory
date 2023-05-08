@@ -24,7 +24,7 @@ public class RabbitMqConsumerService : IConsumerService, IDisposable
         _connectionFactory = connectionFactory;
         _logger = logger;
         _settings = settings.CurrentValue;
-        _connection = connectionFactory.CreateConnection();
+        _connection = _connectionFactory.CreateConnection();
         _model = _connection.CreateModel();
         _model.QueueDeclare(_settings.QueueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
     }
