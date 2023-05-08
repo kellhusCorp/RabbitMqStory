@@ -13,16 +13,30 @@ services:
       - test-network
         
   producer-api:
-    container_name: producer-api
+    container_name: producer
     build:
       context: ./src/ProducerAPI
       dockerfile: Dockerfile
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
       ASPNETCORE_RabbitMqSettings__Host: "some-rabbit"
-      ASPNETCORE_RabbitMqSettings__QueueName: "test_from_docker_compose"
+      ASPNETCORE_RabbitMqSettings__QueueName: "dockerized"
     ports:
       - "90:80"
+    networks:
+      - test-network
+      
+  consumer-api:
+    container_name: consumer
+    build:
+      context: ./src/ConsumerAPI
+      dockerfile: Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_RabbitMqSettings__Host: "some-rabbit"
+      ASPNETCORE_RabbitMqSettings__QueueName: "dockerized"
+    ports:
+      - "91:80"
     networks:
       - test-network
         
