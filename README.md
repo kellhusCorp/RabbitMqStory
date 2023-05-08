@@ -19,3 +19,11 @@
 2. Запуск `docker run -d -p 91:80 --name consumer --network=test-network -e ASPNETCORE_ENVIRONMENT=Development consumer-api:<tag>`.
 3. Отправляем сообщения через producer, проверяем логи: `docker logs consumer`.
 
+## Run with docker compose 
+
+`docker compose up -d`
+
+при этом следим за состоянием подписчика, на начале запуска, он пару раз упадет, потом запустится нормально, когда rabbitMq будет готов.
+Отправить сообщение в очередь: http://localhost:90/swagger/index.html, если `Development`, иначе через Post: http://localhost:90/api/rabbitmq/send.
+UI rabbit: http://localhost:15672/.
+Проверить получение сообщения подписчиком: `docker logs consumer`.
