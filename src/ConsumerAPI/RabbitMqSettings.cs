@@ -1,4 +1,4 @@
-﻿namespace ProducerAPI.Settings;
+﻿namespace ConsumerAPI;
 
 public class RabbitMqSettings
 {

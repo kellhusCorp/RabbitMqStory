@@ -4,6 +4,7 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 COPY ["ConsumerAPI.csproj", "ConsumerAPI/"]
+
 WORKDIR "ConsumerAPI/"
 RUN dotnet restore "ConsumerAPI.csproj"
 COPY . .

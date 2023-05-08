@@ -1,22 +1,23 @@
+using ConsumerAPI;
+using ConsumerAPI.Extensions;
+using ConsumerAPI.Services;
+
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
+builder.Configuration.AddEnvironmentVariables();
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.Configure<RabbitMqSettings>(builder.Configuration.GetSection("RabbitMqSettings"));
+builder.Services.AddRabbitMqConnectionFactory();
+builder.Services.AddSingleton<IConsumerService, RabbitMqConsumerService>();
+builder.Services.AddHostedService<RabbitMqBackgroundService>();
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

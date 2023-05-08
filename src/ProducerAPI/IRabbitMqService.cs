@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Text.Json;
+using ConsumerAPI;
 using Microsoft.Extensions.Options;
-using ProducerAPI.Settings;
 using RabbitMQ.Client;
 
 namespace ProducerAPI;
