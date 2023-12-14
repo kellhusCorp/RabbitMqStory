@@ -12,6 +12,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProducerAPI", "src\Producer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsumerAPI", "src\ConsumerAPI\ConsumerAPI.csproj", "{2B636851-A904-4583-A576-F71E93802D49}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{396A033A-8366-43E5-8C51-80FBB9B8049D}"
+	ProjectSection(SolutionItems) = preProject
+		tests\load tests\TestPlanSendMessage.jmx = tests\load tests\TestPlanSendMessage.jmx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

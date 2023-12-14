@@ -29,7 +29,6 @@ services:
       - some-rabbit
       
   consumer-api:
-    container_name: consumer
     build:
       context: ./src/ConsumerAPI
       dockerfile: Dockerfile
@@ -38,12 +37,20 @@ services:
       ASPNETCORE_RabbitMqSettings__Host: "some-rabbit"
       ASPNETCORE_RabbitMqSettings__QueueName: "dockerized"
     ports:
-      - "91:80"
+      - "91-92:80"
     networks:
       - test-network
     depends_on:
       - some-rabbit
     restart: on-failure
+    deploy:
+      resources: 
+        limits:
+          cpus: '0.50'
+          memory: 150M
+      mode: replicated
+      replicas: 2
+      endpoint_mode: vip
         
 networks:
   test-network:
